@@ -7,6 +7,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 import edu.educationportal.Core.Adapters.ViewPagerAdapter;
@@ -18,10 +21,14 @@ import edu.educationportal.R;
 
 public class BaseActivity extends AppCompatActivity {
 
+    private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        setFirebaseAuth(FirebaseAuth.getInstance());
     }
 
     protected void setupPagerAndTabs(ArrayList<BaseFragment> fragments){
@@ -42,5 +49,17 @@ public class BaseActivity extends AppCompatActivity {
         }else{
             return true;
         }
+    }
+
+    public FirebaseAuth getFirebaseAuth() {
+        return firebaseAuth;
+    }
+
+    public void setFirebaseAuth(FirebaseAuth firebaseAuth) {
+        this.firebaseAuth = firebaseAuth;
+    }
+
+    public FirebaseUser getFirebaseUser(){
+        return getFirebaseAuth().getCurrentUser();
     }
 }

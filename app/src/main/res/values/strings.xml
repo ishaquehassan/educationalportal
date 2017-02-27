@@ -4,6 +4,11 @@
     <string name="tch_portal_main_btn">TEACHERS PORTAL</string>
     <string name="et_email">Email</string>
     <string name="et_password">Password</string>
-    <string name="btn_sign_in">SIGN IN</string>
+    <string name="btn_sign_in">DONE</string>
     <string name="invalid_sign_in_toast">Invalid Email / Password</string>
+    <string name="title_activity_students_dashboard">StudentsDashboard</string>
+    <string name="et_name">Name</string>
+    <string name="logout">Logout</string>
+    <string name="et_notificaion_title">Notification Title</string>
+    <string name="et_notificaion_descp">Norification Description</string>
 </resources>

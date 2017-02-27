@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:text="Add Notification"
+        />
+
+
+   <android.support.design.widget.TextInputLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+       <EditText
+           android:id="@+id/et_title"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:hint="@string/et_notificaion_title"/>
+
+   </android.support.design.widget.TextInputLayout>
+
+
+   <android.support.design.widget.TextInputLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+       <EditText
+           android:id="@+id/et_descp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:hint="@string/et_notificaion_descp"/>
+
+   </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/save_notification"
+        android:layout_gravity="right"
+        android:text="Done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/notifications_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

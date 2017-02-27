@@ -16,7 +16,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Students.StudentsAuth" />
-        <activity android:name=".Teachers.TeachersAuth"></activity>
+        <activity android:name=".Teachers.TeachersAuth" />
+        <activity android:name=".Students.Dashboard.StudentsDashboard" />
+        <activity android:name=".Teachers.Dashboard.TeachersDashboard" />
     </application>
 
 </manifest>
