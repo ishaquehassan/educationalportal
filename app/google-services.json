@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1017627581939",
+    "firebase_url": "https://education-portal-18aeb.firebaseio.com",
+    "project_id": "education-portal-18aeb",
+    "storage_bucket": "education-portal-18aeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017627581939:android:a173e40546acbe58",
+        "android_client_info": {
+          "package_name": "edu.educationportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017627581939-2ffnvp4f66ednip5ctu66rtp7ia3o60m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZHEx6eFxg535qe4hF7GrZJLQcv0RG-No"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

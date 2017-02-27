@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Education Portal</string>
+    <string name="stu_portal_main_btn">STUDENTS PORTAL</string>
+    <string name="tch_portal_main_btn">TEACHERS PORTAL</string>
+    <string name="et_email">Email</string>
+    <string name="et_password">Password</string>
+    <string name="btn_sign_in">SIGN IN</string>
+    <string name="invalid_sign_in_toast">Invalid Email / Password</string>
+</resources>
