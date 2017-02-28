@@ -7,14 +7,16 @@ package edu.educationportal.Models;
 public class Student {
     String name;
     String email;
+    Integer semester;
 
     public Student(){
 
     }
 
-    public Student(String name, String email) {
+    public Student(String name, String email, Integer semester) {
         this.name = name;
         this.email = email;
+        this.semester = semester;
     }
 
     public String getName() {
@@ -31,5 +33,13 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getSemester() {
+        return semester;
+    }
+
+    public void setSemester(Integer semester) {
+        this.semester = semester;
     }
 }

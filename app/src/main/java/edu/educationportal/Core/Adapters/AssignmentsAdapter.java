@@ -8,18 +8,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import edu.educationportal.Models.Notification;
+import edu.educationportal.Models.Assignment;
 import edu.educationportal.R;
 
 /**
  * Created by Ishaq Hassan on 2/28/2017.
  */
 
-public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdapter.ViewHolder> {
-    ArrayList<Notification> notifications = new ArrayList<>();
+public class AssignmentsAdapter extends RecyclerView.Adapter<AssignmentsAdapter.ViewHolder> {
+    ArrayList<Assignment> assignments = new ArrayList<>();
 
-    public NotificationsAdapter(ArrayList<Notification> notifications){
-        this.notifications = notifications;
+    public AssignmentsAdapter(ArrayList<Assignment> assignments){
+        this.assignments = assignments;
     }
 
     @Override
@@ -29,15 +29,15 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Notification notification = notifications.get(position);
-        holder.title.setText(notification.getTitle());
-        holder.descp.setText(notification.getDescp());
-        holder.notification_teacher.setText("Teacher: "+notification.getTeacherName());
+        Assignment assignment = assignments.get(position);
+        holder.title.setText(assignment.getTitle());
+        holder.descp.setText(assignment.getDescp());
+        holder.notification_teacher.setText("Teacher: "+assignment.getTeacherName());
     }
 
     @Override
     public int getItemCount() {
-        return notifications.size();
+        return assignments.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{

@@ -8,6 +8,8 @@ import edu.educationportal.Core.BaseDashboardActivity;
 import edu.educationportal.Core.BaseFragment;
 import edu.educationportal.R;
 import edu.educationportal.Students.Dashboard.Tabs.Notifications;
+import edu.educationportal.Students.Dashboard.Tabs.Assignments;
+import edu.educationportal.Students.Dashboard.Tabs.UpdateProfile;
 
 public class StudentsDashboard extends BaseDashboardActivity {
 
@@ -20,6 +22,8 @@ public class StudentsDashboard extends BaseDashboardActivity {
 
         ArrayList<BaseFragment> pages = new ArrayList<>();
         pages.add(new Notifications());
+        pages.add(new Assignments());
+        pages.add(new UpdateProfile());
 
         setupPagerAndTabs(pages);
     }

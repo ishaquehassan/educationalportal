@@ -45,6 +45,54 @@
 
     </android.support.design.widget.TextInputLayout>
 
+    <RadioGroup
+        android:id="@+id/stuSemGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Semester"/>
+
+
+        <RadioButton
+            android:id="@+id/firstSem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1st Semester"/>
+        <RadioButton
+            android:id="@+id/secondSem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2nd Semester"/>
+        <RadioButton
+            android:id="@+id/thirdSem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3rd Semester"/>
+        <RadioButton
+            android:id="@+id/fourthSem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4th Semester"/>
+        <RadioButton
+            android:id="@+id/fifthSem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5th Semester"/>
+        <RadioButton
+            android:id="@+id/sixthSem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6th Semester"/>
+
+    </RadioGroup>
+
     <Button
         android:id="@+id/btn_sign_in"
         android:layout_gravity="right"

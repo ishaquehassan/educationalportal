@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,52 +24,58 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import edu.educationportal.Core.Adapters.NotificationsAdapter;
+import edu.educationportal.Core.Adapters.AssignmentsAdapter;
 import edu.educationportal.Core.BaseActivity;
 import edu.educationportal.Core.BaseFragment;
 import edu.educationportal.Core.CoreFeatures;
-import edu.educationportal.Models.Notification;
+import edu.educationportal.Models.Assignment;
 import edu.educationportal.R;
 
 /**
  * Created by Ishaq Hassan on 2/28/2017.
  */
 
-public class Notifications extends BaseFragment {
+public class Assignments extends BaseFragment {
 
-    private ArrayList<Notification> notifications;
+    private ArrayList<Assignment> assignments;
 
     private EditText et_title;
     private EditText et_descp;
     private Button save_notification;
-    private DatabaseReference notificationsRefrence;
+    private DatabaseReference assignmentsRefrence;
+    private RadioButton firstSem;
+    private RadioButton secondSem;
+    private RadioButton thirdSem;
+    private RadioButton fourthSem;
+    private RadioButton fifthSem;
+    private RadioButton sixthSem;
 
-    public Notifications() {
-        setTitle("Notifications");
+    public Assignments() {
+        setTitle("Assignments");
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        setFragmentView(inflater.inflate(R.layout.teachers_notifications, container, false));
+        setFragmentView(inflater.inflate(R.layout.teachers_assignment, container, false));
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.notifications_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        notifications = new ArrayList<>();
-        final RecyclerView.Adapter adapter = new NotificationsAdapter(notifications);
+        assignments = new ArrayList<>();
+        final RecyclerView.Adapter adapter = new AssignmentsAdapter(assignments);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        notificationsRefrence = FirebaseDatabase.getInstance().getReference().child("Notifications");
+        assignmentsRefrence = FirebaseDatabase.getInstance().getReference().child("assignments");
 
-        notificationsRefrence.addChildEventListener(new ChildEventListener() {
+        assignmentsRefrence.orderByChild("teacherId").equalTo(((BaseActivity)getActivity()).getFirebaseUser().getUid()).addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        Notification notification = dataSnapshot.getValue(Notification.class);
-                        if (notification != null) {
-                            notifications.add(notification);
-                            adapter.notifyItemInserted(notifications.size() - 1);
+                        Assignment assignment = dataSnapshot.getValue(Assignment.class);
+                        if (assignment != null) {
+                            assignments.add(assignment);
+                            adapter.notifyItemInserted(assignments.size() - 1);
                         }
                     }
 
@@ -94,7 +101,7 @@ public class Notifications extends BaseFragment {
                 });
 
         setupComponents();
-        setupListners();
+        setupListeners();
 
         return getFragmentView();
     }
@@ -102,10 +109,18 @@ public class Notifications extends BaseFragment {
     private void setupComponents(){
         et_title = (EditText) findViewById(R.id.et_title);
         et_descp = (EditText) findViewById(R.id.et_descp);
+
+        firstSem = (RadioButton) findViewById(R.id.firstSem);
+        secondSem = (RadioButton) findViewById(R.id.secondSem);
+        thirdSem = (RadioButton) findViewById(R.id.thirdSem);
+        fourthSem = (RadioButton) findViewById(R.id.fourthSem);
+        fifthSem = (RadioButton) findViewById(R.id.fifthSem);
+        sixthSem = (RadioButton) findViewById(R.id.sixthSem);
+
         save_notification = (Button) findViewById(R.id.save_notification);
     }
 
-    private void setupListners(){
+    private void setupListeners(){
         save_notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,17 +140,44 @@ public class Notifications extends BaseFragment {
                     return;
                 }
 
+                if(!firstSem.isChecked() && !secondSem.isChecked() && !thirdSem.isChecked() && !fourthSem.isChecked() && !fifthSem.isChecked() && !sixthSem.isChecked()) {
+                    Toast.makeText(getContext(), "Please Select a semester to save assignment", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                int sem = 0;
+                if(firstSem.isChecked()){
+                    sem = 1;
+                }else if(secondSem.isChecked()){
+                    sem = 2;
+                }else if(thirdSem.isChecked()){
+                    sem = 3;
+                }else if(fourthSem.isChecked()){
+                    sem = 4;
+                }else if(fifthSem.isChecked()){
+                    sem = 5;
+                }else if(sixthSem.isChecked()){
+                    sem = 6;
+                }
+
                 final ProgressDialog progressDialog = CoreFeatures.buildLoadingDialog(getContext(),"Saving...");
                 progressDialog.show();
 
-                Notification notification = new Notification(title,descp,((BaseActivity)getActivity()).getFirebaseUser().getDisplayName());
-                notificationsRefrence.push().setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
+                Assignment assignment = new Assignment(title,descp,((BaseActivity)getActivity()).getFirebaseUser().getDisplayName(),sem,((BaseActivity)getActivity()).getFirebaseUser().getUid());
+                assignmentsRefrence.push().setValue(assignment).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
                             et_title.setText("");
                             et_descp.setText("");
+                            firstSem.setChecked(false);
+                            secondSem.setChecked(false);
+                            thirdSem.setChecked(false);
+                            fourthSem.setChecked(false);
+                            fifthSem.setChecked(false);
+                            sixthSem.setChecked(false);
+
                             Toast.makeText(getContext(),"SAVED!",Toast.LENGTH_SHORT).show();
                         }else{
                             Toast.makeText(getContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();

@@ -1,21 +1,25 @@
 package edu.educationportal.Models;
 
 /**
- * Created by Ishaq Hassan on 2/28/2017.
+ * Created by Ishaq Hassan on 3/1/2017.
  */
 
-public class Notification {
+public class Assignment {
     String title;
     String descp;
     String teacherName;
+    Integer semester;
+    String teacherId;
 
-    public Notification() {
+    public Assignment() {
     }
 
-    public Notification(String title, String descp,String teacherName) {
+    public Assignment(String title, String descp, String teacherName, Integer semester, String teacherId) {
         this.title = title;
         this.descp = descp;
         this.teacherName = teacherName;
+        this.semester = semester;
+        this.teacherId = teacherId;
     }
 
     public String getTitle() {
@@ -40,5 +44,21 @@ public class Notification {
 
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
+    }
+
+    public Integer getSemester() {
+        return semester;
+    }
+
+    public void setSemester(Integer semester) {
+        this.semester = semester;
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
     }
 }

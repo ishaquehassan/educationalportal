@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import edu.educationportal.Core.BaseDashboardActivity;
 import edu.educationportal.Core.BaseFragment;
 import edu.educationportal.R;
+import edu.educationportal.Teachers.Dashboard.Tabs.Assignments;
 import edu.educationportal.Teachers.Dashboard.Tabs.Notifications;
 
 public class TeachersDashboard extends BaseDashboardActivity {
@@ -21,6 +22,7 @@ public class TeachersDashboard extends BaseDashboardActivity {
 
         ArrayList<BaseFragment> pages = new ArrayList<>();
         pages.add(new Notifications());
+        pages.add(new Assignments());
 
         setupPagerAndTabs(pages);
 

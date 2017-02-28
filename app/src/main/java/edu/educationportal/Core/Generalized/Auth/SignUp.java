@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +40,14 @@ public class SignUp extends BaseFragment {
     private EditText et_password;
     private Button btn_sign_in;
 
+    private RadioGroup stuSemGroup;
+    private RadioButton firstSem;
+    private RadioButton secondSem;
+    private RadioButton thirdSem;
+    private RadioButton fourthSem;
+    private RadioButton fifthSem;
+    private RadioButton sixthSem;
+
     private boolean isTeacher;
 
     private ProgressDialog progressDialog;
@@ -62,7 +72,19 @@ public class SignUp extends BaseFragment {
         et_password = (EditText) findViewById(R.id.et_password);
         btn_sign_in = (Button) findViewById(R.id.btn_sign_in);
 
+        stuSemGroup = (RadioGroup) findViewById(R.id.stuSemGroup);
+        firstSem = (RadioButton) findViewById(R.id.firstSem);
+        secondSem = (RadioButton) findViewById(R.id.secondSem);
+        thirdSem = (RadioButton) findViewById(R.id.thirdSem);
+        fourthSem = (RadioButton) findViewById(R.id.fourthSem);
+        fifthSem = (RadioButton) findViewById(R.id.fifthSem);
+        sixthSem = (RadioButton) findViewById(R.id.sixthSem);
+
         progressDialog = CoreFeatures.buildLoadingDialog(getContext(),"Loading...Please wait");
+
+        if(isTeacher()){
+            stuSemGroup.setVisibility(View.GONE);
+        }
     }
 
     private void setupListeners(){
@@ -72,6 +94,7 @@ public class SignUp extends BaseFragment {
                 String name = et_name.getText().toString();
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
+                int sem = 0;
 
                 et_name.setError(null);
                 et_email.setError(null);
@@ -92,12 +115,33 @@ public class SignUp extends BaseFragment {
                     return;
                 }
 
-                login(name,email,password);
+                if(!isTeacher()){
+                    if(!firstSem.isChecked() && !secondSem.isChecked() && !thirdSem.isChecked() && !fourthSem.isChecked() && !fifthSem.isChecked() && !sixthSem.isChecked()) {
+                        Toast.makeText(getContext(), "Please Select a semester to SignUp", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if(firstSem.isChecked()){
+                        sem = 1;
+                    }else if(secondSem.isChecked()){
+                        sem = 2;
+                    }else if(thirdSem.isChecked()){
+                        sem = 3;
+                    }else if(fourthSem.isChecked()){
+                        sem = 4;
+                    }else if(fifthSem.isChecked()){
+                        sem = 5;
+                    }else if(sixthSem.isChecked()){
+                        sem = 6;
+                    }
+                }
+
+                login(name,email,password,sem);
             }
         });
     }
 
-    private void login(final String name, final String email, String password){
+    private void login(final String name, final String email, String password, final Integer semester){
         progressDialog.show();
         FirebaseAuth.getInstance()
                 .createUserWithEmailAndPassword(email,password)
@@ -125,7 +169,7 @@ public class SignUp extends BaseFragment {
                                     }else{
                                         FirebaseDatabase.getInstance().getReference().child("students")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .setValue(new Student(name,email)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                .setValue(new Student(name,email,semester)).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 startActivity(new Intent(getContext(), StudentsDashboard.class));

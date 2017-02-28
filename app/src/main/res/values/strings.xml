@@ -11,4 +11,8 @@
     <string name="logout">Logout</string>
     <string name="et_notificaion_title">Notification Title</string>
     <string name="et_notificaion_descp">Norification Description</string>
+    <string name="et_assignment_title">Assignment Title</string>
+    <string name="et_assignment_descp">Assignment Description</string>
+    <string name="et_user_name">Name</string>
+    <string name="et_user_email">Email</string>
 </resources>
