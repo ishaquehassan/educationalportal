@@ -50,6 +50,9 @@ public class Assignments extends BaseFragment {
     private RadioButton fifthSem;
     private RadioButton sixthSem;
 
+    private View addBlock;
+    private View addBtn;
+
     public Assignments() {
         setTitle("Assignments");
     }
@@ -58,6 +61,21 @@ public class Assignments extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setFragmentView(inflater.inflate(R.layout.teachers_assignment, container, false));
+
+        addBlock = findViewById(R.id.addBlock);
+        addBtn = findViewById(R.id.addBtn);
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(addBlock.getTranslationX() < 0){
+                    addBlock.animate().setDuration(250).translationX(0);
+                }else{
+                    addBlock.animate().setDuration(250).translationX((addBlock.getWidth()+200 - ((addBlock.getWidth()+200)*2)));
+                }
+            }
+        });
+
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.notifications_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -179,6 +197,7 @@ public class Assignments extends BaseFragment {
                             sixthSem.setChecked(false);
 
                             Toast.makeText(getContext(),"SAVED!",Toast.LENGTH_SHORT).show();
+                            addBlock.animate().setDuration(250).translationX((addBlock.getWidth()+200 - ((addBlock.getWidth()+200)*2)));
                         }else{
                             Toast.makeText(getContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                         }
