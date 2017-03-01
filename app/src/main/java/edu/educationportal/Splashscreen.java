@@ -1,16 +1,13 @@
 package edu.educationportal;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-
+import android.os.Handler;
 
 /**
  * Created by erumk on 01-Dec-16.
  */
-
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Handler;
 
 
 public class Splashscreen extends Activity {

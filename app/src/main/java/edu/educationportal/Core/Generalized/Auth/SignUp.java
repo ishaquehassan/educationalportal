@@ -156,22 +156,28 @@ public class SignUp extends BaseFragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(isTeacher()){
+                                        final Teacher teacher = new Teacher(name,email);
                                         FirebaseDatabase.getInstance().getReference().child("teachers")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .setValue(new Teacher(name,email)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                .setValue(teacher).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
+                                                CoreFeatures.teacher = teacher;
+                                                CoreFeatures.isTeacher = true;
                                                 startActivity(new Intent(getContext(), TeachersDashboard.class));
                                                 getActivity().finish();
                                                 progressDialog.dismiss();
                                             }
                                         });
                                     }else{
+                                        final Student student = new Student(name,email,semester);
                                         FirebaseDatabase.getInstance().getReference().child("students")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .setValue(new Student(name,email,semester)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                .setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
+                                                CoreFeatures.student = student;
+                                                CoreFeatures.isTeacher = false;
                                                 startActivity(new Intent(getContext(), StudentsDashboard.class));
                                                 getActivity().finish();
                                                 progressDialog.dismiss();

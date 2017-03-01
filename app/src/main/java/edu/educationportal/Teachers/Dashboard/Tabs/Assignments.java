@@ -63,6 +63,12 @@ public class Assignments extends BaseFragment {
         setFragmentView(inflater.inflate(R.layout.teachers_assignment, container, false));
 
         addBlock = findViewById(R.id.addBlock);
+        addBlock.post(new Runnable() {
+            @Override
+            public void run() {
+                addBlock.animate().setDuration(1).translationX(-addBlock.getWidth()*2);
+            }
+        });
         addBtn = findViewById(R.id.addBtn);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +77,7 @@ public class Assignments extends BaseFragment {
                 if(addBlock.getTranslationX() < 0){
                     addBlock.animate().setDuration(250).translationX(0);
                 }else{
-                    addBlock.animate().setDuration(250).translationX((addBlock.getWidth()+200 - ((addBlock.getWidth()+200)*2)));
+                    addBlock.animate().setDuration(500).translationX(-addBlock.getWidth()*2);
                 }
             }
         });
